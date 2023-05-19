@@ -1,6 +1,9 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+
+  
+   
   *,
   *::after,
   *::before{
@@ -12,7 +15,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body{
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'Inter', sans-serif;
   }
   a{
     text-decoration: none;
