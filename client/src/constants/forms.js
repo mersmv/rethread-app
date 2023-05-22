@@ -27,7 +27,7 @@ export const FORM_VALIDATIONS = {
 	},
 	username: {
 		require: messages.requireUserName,
-		patterns: patterns.email,
+		pattern: patterns.username,
 		message: messages.username
 	},
 	password: {

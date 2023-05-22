@@ -1,6 +1,7 @@
 import { FORM_VALIDATIONS } from '../../constants/forms';
 import { handleUploadPic } from '../../constants/uploadfiles';
 import { useForm } from 'react-hook-form';
+import { StyledContainer, StyledLabel, StyledLegend } from './styles';
 
 const Register = () => {
 	const {
@@ -10,9 +11,9 @@ const Register = () => {
 	} = useForm();
 
 	return (
-		<div>
-			<form action='' onSubmit={e => handleSubmit(onSubmit)}>
-				<label htmlFor='name'>
+		<StyledContainer>
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<StyledLabel htmlFor='name'>
 					Nombre:
 					<input
 						type='text'
@@ -27,15 +28,15 @@ const Register = () => {
 						})}
 					/>
 					<span>{errors?.name?.message}</span>
-				</label>
+				</StyledLabel>
 
-				<label htmlFor='email'>
+				<StyledLabel htmlFor='email'>
 					Email:
 					<input
 						type='text'
 						id='email'
-						name='mail'
-						{...register('name', {
+						name='email'
+						{...register('email', {
 							required: FORM_VALIDATIONS['email'].require,
 							pattern: {
 								value: FORM_VALIDATIONS['email'].pattern,
@@ -43,15 +44,15 @@ const Register = () => {
 							}
 						})}
 					/>
-					<span>{errors?.name?.message}</span>
-				</label>
-				<label htmlFor='username'>
+					<span>{errors?.email?.message}</span>
+				</StyledLabel>
+				<StyledLabel htmlFor='username'>
 					Usuario:
 					<input
 						type='text'
 						id='username'
-						name='user'
-						{...register('name', {
+						name='username'
+						{...register('username', {
 							required: FORM_VALIDATIONS['username'].require,
 							pattern: {
 								value: FORM_VALIDATIONS['username'].pattern,
@@ -59,15 +60,15 @@ const Register = () => {
 							}
 						})}
 					/>
-					<span>{errors?.name?.message}</span>
-				</label>
-				<label htmlFor='password'>
+					<span>{errors?.username?.message}</span>
+				</StyledLabel>
+				<StyledLabel htmlFor='password'>
 					Contraseña:
 					<input
 						type='text'
 						name='password'
 						id='password'
-						{...register('name', {
+						{...register('password', {
 							required: FORM_VALIDATIONS['password'].require,
 							pattern: {
 								value: FORM_VALIDATIONS['password'].pattern,
@@ -75,42 +76,35 @@ const Register = () => {
 							}
 						})}
 					/>
-				</label>
-				<label htmlFor='conformPassword'>
-					Repite la contraseña:
-					<input type='text' name='confirmPassword' />
-				</label>
-				<legend>Ciudad:</legend>
+				</StyledLabel>
+				<StyledLegend>Ciudad:</StyledLegend>
 				<select name='' id=''>
-					<option value='Madrd'>Madrid</option>
+					<option value='Madrid'>Madrid</option>
 					<option value='Barcelona'>Barcelona</option>
 					<option value='Sevilla'>Sevilla</option>
 					<option value='Valencia'>Valencia</option>
 					<option value='Malaga'>Málaga</option>
 				</select>
-				<label htmlFor=''>
+				<StyledLabel htmlFor=''>
 					<input
 						type='file'
 						name=''
 						id=''
 						onChange={e => handleUploadPic(e.target.files)}
 					/>
-				</label>
+				</StyledLabel>
 				<input type='submit' />
 			</form>
-		</div>
+		</StyledContainer>
 	);
 };
 
-const onSubmit = async (data, e) => {
-	e.preventDefault();
-	if (data.password !== data.confirmPassword) {
-		return console.log('No coinciden las contraseñas');
-	}
+const onSubmit = async data => {
+	if (data.password != data.confirmPassword) return;
 	try {
-		await createUserWithEmailAndPassword(data);
+		//await createUserWithEmailAndPassword(auth, data.email, data.password);
 	} catch (err) {
-		console.log('error');
+		console.log(error);
 	}
 };
 export default Register;
