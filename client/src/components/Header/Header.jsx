@@ -1,39 +1,18 @@
-import { COLORS } from '../../constants/colors';
-import Button from '../Button/Button';
-import {
-	StyledLinksContainer,
-	StyledLogo,
-	StyledNav,
-	StyledSearch
-} from './styles';
+import { useContext } from 'react';
+import { AuthContext } from '../../config/firebase.config';
+import HeaderNoUser from '../HeaderNoUser/HeaderNoUser';
+import HeaderUser from '../HeaderUser/HeaderUser';
 
 const Header = () => {
+	const { currentUser } = useContext(AuthContext);
+
+	if (!currentUser) return <h1>Loading...</h1>;
+
 	return (
-		<StyledNav>
-			<StyledLinksContainer>
-				<Button
-					link={'/register'}
-					color={COLORS.secondaryDark}
-					text={'registrate'}
-				></Button>
-				<Button
-					link={'/login'}
-					color={COLORS.secondaryLight}
-					text={'login'}
-				></Button>
-			</StyledLinksContainer>
-			<StyledLogo src='assets/images/logo-rethread.png' alt='' />
-			<div>
-				<label htmlFor=''>
-					search
-					<div>
-						<img src='' alt='' />
-						<StyledSearch type='text' />
-					</div>
-				</label>
-			</div>
-			<img src='' alt='' />
-		</StyledNav>
+		<>
+			{!currentUser && <HeaderNoUser />}
+			{currentUser && <HeaderUser />}
+		</>
 	);
 };
 

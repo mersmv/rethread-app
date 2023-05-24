@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 const StyledButton = styled(Link)`
-	width: 80px;
+	width: 120px;
 	height: 30px;
 	border-radius: 20px;
 	font-size: 0.9rem;

@@ -14,11 +14,6 @@ const StyledContainer = styled.div`
 	background-color: ${COLORS.secondaryLight};
 `;
 
-const StyledTitle = styled.h1`
-	font-size: 1.5rem;
-	margin-bottom: 40px;
-	color: ${COLORS.secondaryDark};
-`;
 const StyledLabel = styled.label`
 	display: flex;
 	flex-direction: column;
@@ -35,8 +30,8 @@ const StyledInput = styled.input`
 `;
 
 const SubmitButton = styled.input`
-	margin-top: 50px;
-	width: 170px;
+	margin-top: 20px;
+	width: 150px;
 	height: 30px;
 	background-color: ${COLORS.secondaryDark};
 	border-radius: 20px;
@@ -49,14 +44,31 @@ const SubmitButton = styled.input`
 	color: white;
 `;
 
-const SpanWarning = styled.span`
-	color: lightgray;
+const StyledButton = styled.button`
+	width: 300px;
+	height: 35px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: ${COLORS.secondaryDark};
+	border: 1px solid transparent;
+	border-radius: 15px;
+	display: flex;
+	padding-left: 15px;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	color: white;
+`;
+
+const GoogleLogo = styled.img`
+	width: 20px;
+	margin-right: 10px;
 `;
 export {
 	StyledContainer,
 	StyledLabel,
 	StyledInput,
 	SubmitButton,
-	StyledTitle,
-	SpanWarning
+	StyledButton,
+	GoogleLogo
 };

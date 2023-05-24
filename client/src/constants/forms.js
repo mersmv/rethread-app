@@ -5,13 +5,24 @@ const messages = {
 	requireEmail: 'El email es obligatorio',
 	username: 'El ususario ya existe',
 	requireUserName: 'Debes introducir un nombre de usuario',
-	requirePassword: 'Introducir la contraseña es obligatorio'
+	requirePassword: 'Introducir la contraseña es obligatorio',
+	password: 'Contraseña invalida',
+	mismatchPasswords: 'Las contraseñas no coinciden',
+	length: 'La contraseña debe tener minimo 6 carcateres'
 };
 
 const patterns = {
 	name: /^[A-Za-z]*$/,
 	email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-	username: /^[a-z0-9_]+$/
+	username: /^[a-z0-9_]+$/,
+	password: /^[a-zA-Z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/
+};
+
+export const validatePassword = (value, getValues) => {
+	const password = getValues('password');
+	if (password != value) {
+		return 'las contraseñas no coinciden';
+	}
 };
 
 export const FORM_VALIDATIONS = {
@@ -31,6 +42,12 @@ export const FORM_VALIDATIONS = {
 		message: messages.username
 	},
 	password: {
-		require: messages.requirePassword
+		require: messages.requirePassword,
+		pattern: patterns.password,
+		message: messages.password,
+		messageLenght: messages.length
+	},
+	repeatPassword: {
+		require: messages.mismatchPasswords
 	}
 };

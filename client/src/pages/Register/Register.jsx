@@ -1,21 +1,31 @@
-import { FORM_VALIDATIONS } from '../../constants/forms';
+import { FORM_VALIDATIONS, validatePassword } from '../../constants/forms';
 import { handleUploadPic } from '../../constants/uploadfiles';
 import { useForm } from 'react-hook-form';
-import { StyledContainer, StyledLabel, StyledLegend } from './styles';
-
+import {
+	SpanWarning,
+	StyledContainer,
+	StyledInput,
+	StyledLabel,
+	StyledTitle,
+	SubmitButton
+} from './styles';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase.config';
 const Register = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors }
+		formState: { errors },
+		getValues
 	} = useForm();
 
 	return (
 		<StyledContainer>
+			<StyledTitle>¡Regístrate con nosotros!</StyledTitle>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<StyledLabel htmlFor='name'>
 					Nombre:
-					<input
+					<StyledInput
 						type='text'
 						name='name'
 						id='name'
@@ -27,12 +37,12 @@ const Register = () => {
 							}
 						})}
 					/>
-					<span>{errors?.name?.message}</span>
+					<SpanWarning>{errors?.name?.message}</SpanWarning>
 				</StyledLabel>
 
 				<StyledLabel htmlFor='email'>
 					Email:
-					<input
+					<StyledInput
 						type='text'
 						id='email'
 						name='email'
@@ -44,11 +54,11 @@ const Register = () => {
 							}
 						})}
 					/>
-					<span>{errors?.email?.message}</span>
+					<SpanWarning>{errors?.email?.message}</SpanWarning>
 				</StyledLabel>
 				<StyledLabel htmlFor='username'>
 					Usuario:
-					<input
+					<StyledInput
 						type='text'
 						id='username'
 						name='username'
@@ -60,12 +70,12 @@ const Register = () => {
 							}
 						})}
 					/>
-					<span>{errors?.username?.message}</span>
+					<SpanWarning>{errors?.username?.message}</SpanWarning>
 				</StyledLabel>
 				<StyledLabel htmlFor='password'>
 					Contraseña:
-					<input
-						type='text'
+					<StyledInput
+						type='password'
 						name='password'
 						id='password'
 						{...register('password', {
@@ -76,35 +86,50 @@ const Register = () => {
 							}
 						})}
 					/>
+					<SpanWarning>{errors?.password?.message}</SpanWarning>
 				</StyledLabel>
-				<StyledLegend>Ciudad:</StyledLegend>
-				<select name='' id=''>
-					<option value='Madrid'>Madrid</option>
-					<option value='Barcelona'>Barcelona</option>
-					<option value='Sevilla'>Sevilla</option>
-					<option value='Valencia'>Valencia</option>
-					<option value='Malaga'>Málaga</option>
-				</select>
-				<StyledLabel htmlFor=''>
+				<StyledLabel htmlFor='repeatPassword'>
+					Repite la contraseña:
+					<StyledInput
+						type='password'
+						name='repeatPassword'
+						id='repeatPassword'
+						{...register('repeatPassword', {
+							required: FORM_VALIDATIONS['repeatPassword'].require,
+							pattern: {
+								value: FORM_VALIDATIONS['repeatPassword'].pattern,
+								message: FORM_VALIDATIONS['repeatPassword'].message
+							},
+							validate: value => validatePassword(value, getValues)
+						})}
+					/>
+					<SpanWarning>{errors?.repeatPassword?.message}</SpanWarning>
+				</StyledLabel>
+				<StyledLabel htmlFor='file'>
+					Foto de perfil:
 					<input
 						type='file'
-						name=''
-						id=''
+						name='file'
+						id='file'
 						onChange={e => handleUploadPic(e.target.files)}
 					/>
 				</StyledLabel>
-				<input type='submit' />
+				<SubmitButton type='submit' />
 			</form>
 		</StyledContainer>
 	);
 };
 
 const onSubmit = async data => {
-	if (data.password != data.confirmPassword) return;
+	console.log(data);
 	try {
-		//await createUserWithEmailAndPassword(auth, data.email, data.password);
+		await createUserWithEmailAndPassword(auth, data.email, data.password);
 	} catch (err) {
-		console.log(error);
+		console.log(err);
 	}
 };
 export default Register;
+
+//tareas del register:
+//como pongo que si la imagen esta vacia me ponga una de archivo
+//cambiar el boton de subir archivos
