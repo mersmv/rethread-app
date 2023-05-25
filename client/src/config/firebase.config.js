@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { createContext } from 'react';
+import { collection, getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,5 +26,11 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 //Crear un contexto
 export const AuthContext = createContext();
+
+//Añadimos todas las colecciones
+const db = getFirestore(app);
+export const clothesCollectionReference = collection(db, 'clothes');
+export const shoesCollectionReference = collection(db, 'shoes');
+export const accesoriesCollectionReference = collection(db, 'accesories');
 
 export const storage = getStorage(app);

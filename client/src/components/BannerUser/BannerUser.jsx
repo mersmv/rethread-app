@@ -16,12 +16,12 @@ const BannerUser = () => {
 					<StyledTitle>
 						Sube tus productos a tu perfil y ¡empieza a ganar!
 					</StyledTitle>
-					<StyledLink onClick={() => navigate('/new-product')}>
+					<StyledLink onClick={() => navigate('/newproduct')}>
 						Añadir Producto
 					</StyledLink>
 				</StyledAddProduct>
 			</StyledAddBackground>
-			<div>{/* productos */}</div>
+			<div></div>
 		</StyledBanner>
 	);
 };

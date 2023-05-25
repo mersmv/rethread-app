@@ -129,7 +129,3 @@ const onSubmit = async data => {
 	}
 };
 export default Register;
-
-//tareas del register:
-//como pongo que si la imagen esta vacia me ponga una de archivo
-//cambiar el boton de subir archivos

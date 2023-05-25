@@ -28,17 +28,18 @@ const StyledAddProduct = styled.div`
 const StyledTitle = styled.h1`
 	width: 60%;
 	font-size: 2rem;
-	line-height: 50px;
+	line-height: 55px;
 `;
 
 const StyledLink = styled.button`
 	font-size: 1.1rem;
 	width: 200px;
-	height: 40px;
+	height: 50px;
 	background-color: ${COLORS.secondaryDark};
-	border-radius: 20px;
+	border-radius: 30px;
 	border: solid 1px transparent;
 	color: white;
+	cursor: pointer;
 `;
 
 export {

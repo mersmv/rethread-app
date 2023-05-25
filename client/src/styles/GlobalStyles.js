@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { COLORS } from '../constants/colors';
 
 const GlobalStyles = createGlobalStyle`
 
@@ -16,6 +17,7 @@ const GlobalStyles = createGlobalStyle`
   body{
     margin: 0;
     font-family: 'Inter', sans-serif;
+
   }
   a{
     text-decoration: none;
